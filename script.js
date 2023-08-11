@@ -128,7 +128,7 @@ function keyControl(b){
  
         b.acc.x = acl.x;
 
-        b.acc.y = -acl.y;
+        b.acc.y = 0
   
 }
 
