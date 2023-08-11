@@ -126,7 +126,7 @@ class Wall{
 
 function keyControl(b){
  
-        b.acc.x = acl.x;
+        b.acc.x = -acl.x;
 
         b.acc.y = acl.y;
   
