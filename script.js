@@ -11,6 +11,10 @@ const acl = new Accelerometer({ frequency: 60 });
 
 acl.start();
 
+const wersja = 1;
+
+document.getElementsByClassName("wersja")[0].innerHTML=wersja
+
 class Vector{
     constructor(x, y){
         this.x = x;
