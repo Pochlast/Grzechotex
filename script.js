@@ -102,7 +102,7 @@ class Ball{
     }
 
     reposition(){
-        this.acc = this.acc.unit(cm).mult(this.acceleration);
+        this.acc = this.acc.unit().mult(this.acceleration);
         this.vel = this.vel.add(this.acc);
         this.vel = this.vel.mult(1-friction);
         this.pos = this.pos.add(this.vel);
@@ -133,9 +133,9 @@ class Wall{
 
 function keyControl(b){
 
-        b.acc.x = -acl.x*10;
+        b.acc.x = -acl.x*370;
 
-        b.acc.y = acl.y*10;
+        b.acc.y = acl.y*370;
         acc_x = acl.x
         document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
 
