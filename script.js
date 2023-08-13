@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 8;
+const wersja = 9;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -234,7 +234,7 @@ function mainLoop(timestamp) {
 
     BALLZ.forEach((b, index) => {
         let new_acc_x = -acl.x;
-        let new_acc_y = -acl.y;
+        let new_acc_y = acl.y;
 
         b.drawBall();
         if (b.player){
