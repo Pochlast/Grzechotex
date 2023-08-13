@@ -7,11 +7,11 @@ const WALLZ = [];
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.05;
 
-const acl = new Accelerometer({ frequency: 60 });
+const acl = new Accelerometer({ frequency: 600 });
 
 acl.start();
 
-const wersja = 4;
+const wersja = 5;
 let acc_x = 0;
 
 document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
