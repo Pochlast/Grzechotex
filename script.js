@@ -5,7 +5,7 @@ const BALLZ = [];
 const WALLZ = [];
 
 let LEFT, UP, RIGHT, DOWN;
-let friction = 0.05;
+let friction = 0.0001;
 
 const acl = new Accelerometer({ frequency: 600 });
 
@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 9;
+const wersja = 10;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
