@@ -102,7 +102,7 @@ class Ball{
     }
 
     reposition(){
-        this.acc = this.acc.unit().mult(this.acceleration);
+        this.acc = this.acc.unit(cm).mult(this.acceleration);
         this.vel = this.vel.add(this.acc);
         this.vel = this.vel.mult(1-friction);
         this.pos = this.pos.add(this.vel);
