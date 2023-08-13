@@ -83,7 +83,7 @@ class Ball{
         this.elasticity = 1;
         this.vel = new Vector(0,0);
         this.acc = new Vector(0,0);
-        this.acceleration = 1;
+        this.acceleration = 3;
         this.player = true;
         BALLZ.push(this);
     }
