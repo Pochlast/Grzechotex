@@ -137,9 +137,12 @@ class Wall{
 
 function keyControl(b,new_acc_x,new_acc_y){
 
-        b.acc.x = acc_x-new_acc_x;
+        //b.acc.x = acc_x-new_acc_x;
 
-        b.acc.y = acc_y-new_acc_y;
+        //b.acc.y = acc_y-new_acc_y;
+        b.acc.x=-acl.x;
+        b.acc.y=acl.y;
+
         acc_x_test = acl.x
         document.getElementsByClassName("acc_x_test")[0].innerHTML=acc_x_test
 
@@ -267,7 +270,7 @@ function mainLoop(timestamp) {
     requestAnimationFrame(mainLoop);
 }
 
-for (let i = 0; i < 10; i++){
+for (let i = 0; i < 2; i++){
     let newBall = new Ball(randInt(100,500), randInt(50,400), randInt(20,50), randInt(0,10));
     newBall.elasticity = randInt(0,10) / 10;
 }
