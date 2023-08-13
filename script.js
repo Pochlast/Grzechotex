@@ -12,6 +12,9 @@ const acl = new Accelerometer({ frequency: 60 });
 acl.start();
 
 const wersja = 1;
+let acc_x = 0;
+
+document.getElementsByClassName("acc_x")[0].innerHTML=wersja
 
 document.getElementsByClassName("wersja")[0].innerHTML=wersja
 
@@ -129,11 +132,11 @@ class Wall{
 }
 
 function keyControl(b){
- 
+
         b.acc.x = -acl.y;
 
         b.acc.y = 0
-  
+        acc_x = acl.y
 }
 
 function round(number, precision){
