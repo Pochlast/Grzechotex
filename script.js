@@ -11,10 +11,14 @@ const acl = new Accelerometer({ frequency: 600 });
 
 acl.start();
 
-const wersja = 7;
-let acc_x = 0;
+let acc_x_test= 0;
 
-document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
+const wersja = 8;
+
+let acc_x = -acl.x;
+let acc_y = acl.y;
+
+document.getElementsByClassName("acc_x_test")[0].innerHTML=acc_x_test
 
 document.getElementsByClassName("wersja")[0].innerHTML=wersja
 
@@ -131,13 +135,13 @@ class Wall{
     }
 }
 
-function keyControl(b){
+function keyControl(b,new_acc_x,new_acc_y){
 
-        b.acc.x = -acl.x*370;
+        b.acc.x = acc_x-new_acc_x;
 
-        b.acc.y = acl.y*370;
-        acc_x = acl.x
-        document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
+        b.acc.y = acc_y-new_acc_y;
+        acc_x_test = acl.x
+        document.getElementsByClassName("acc_x_test")[0].innerHTML=acc_x_test
 
 }
 
@@ -227,10 +231,14 @@ function momentum_display(){
 
 function mainLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+
     BALLZ.forEach((b, index) => {
+        let new_acc_x = -acl.x;
+        let new_acc_y = -acl.y;
+
         b.drawBall();
         if (b.player){
-            keyControl(b);
+            keyControl(b,new_acc_x,new_acc_y);
         }
         //each ball object iterates through each wall object
         WALLZ.forEach((w) => {
@@ -247,6 +255,8 @@ function mainLoop(timestamp) {
         }
         b.display();
         b.reposition();
+        acc_x = -acl.x;
+        acc_y = acl.y;
     });
 
     //drawing each wall on the canvas
