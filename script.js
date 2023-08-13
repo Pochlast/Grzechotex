@@ -133,10 +133,10 @@ class Wall{
 
 function keyControl(b){
 
-        b.acc.x = -acl.y;
+        b.acc.x = 0;
 
-        b.acc.y = 0
-        acc_x = acl.y
+        b.acc.y = acl.y;
+        acc_x = acl.x
         document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
 
 }
