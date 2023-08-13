@@ -255,10 +255,10 @@ function mainLoop(timestamp) {
         }
         b.display();
         b.reposition();
-        acc_x = -acl.x;
-        acc_y = acl.y;
     });
 
+    acc_x = -acl.x;
+    acc_y = acl.y;
     //drawing each wall on the canvas
     WALLZ.forEach((w) => {
         w.drawWall();
