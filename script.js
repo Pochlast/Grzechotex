@@ -11,7 +11,7 @@ const acl = new Accelerometer({ frequency: 60 });
 
 acl.start();
 
-const wersja = 2;
+const wersja = 3;
 let acc_x = 0;
 
 document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
@@ -137,6 +137,8 @@ function keyControl(b){
 
         b.acc.y = 0
         acc_x = acl.y
+        document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
+
 }
 
 function round(number, precision){
