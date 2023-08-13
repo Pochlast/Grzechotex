@@ -11,7 +11,7 @@ const acl = new Accelerometer({ frequency: 60 });
 
 acl.start();
 
-const wersja = 3;
+const wersja = 4;
 let acc_x = 0;
 
 document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
@@ -133,7 +133,7 @@ class Wall{
 
 function keyControl(b){
 
-        b.acc.x = 0;
+        b.acc.x = -acl.x;
 
         b.acc.y = acl.y;
         acc_x = acl.x
