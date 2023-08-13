@@ -14,7 +14,7 @@ acl.start();
 const wersja = 1;
 let acc_x = 0;
 
-document.getElementsByClassName("acc_x")[0].innerHTML=wersja
+document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
 
 document.getElementsByClassName("wersja")[0].innerHTML=wersja
 
