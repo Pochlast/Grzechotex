@@ -11,7 +11,7 @@ const acl = new Accelerometer({ frequency: 60 });
 
 acl.start();
 
-const wersja = 1;
+const wersja = 2;
 let acc_x = 0;
 
 document.getElementsByClassName("acc_x")[0].innerHTML=acc_x
