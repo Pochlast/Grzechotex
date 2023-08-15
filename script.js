@@ -182,9 +182,9 @@ function coll_det_bb(b1, b2){
     }
 }
 
-function zderzenie(b){
-    if (b.pos.x <0){ b.acc.x=-b.acc.x } 
-}
+// function zderzenie(b){
+//     if (b.pos.x <0){ b.acc.x=-b.acc.x } 
+// }
 
 
 
@@ -247,7 +247,7 @@ function mainLoop(timestamp) {
 
         b.drawBall();
         if (b.player){
-            keyControl(b,new_acc_x,new_acc_y);
+            acc_Control(b,new_acc_x,new_acc_y);
         }
         //each ball object iterates through each wall object
         zderzenie(b);
