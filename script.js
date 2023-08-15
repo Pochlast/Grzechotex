@@ -187,7 +187,8 @@ function coll_det_bb(b1, b2){
 
 function zderzenie(b){
 
-    acc_x_test = Math.round(b.vel.x*100)/100;
+    acc_x_test = Math.round(b.vel.y*100)/100;
+
     document.getElementsByClassName("acc_x_test")[0].innerHTML=acc_x_test
 
     if (b.pos.x <0+b.r){
@@ -195,7 +196,7 @@ function zderzenie(b){
         b.pos.x+=b.r-b.pos.x;
         //audio.play();
 
-        if (Math.abs(b.vel.x)>1.65){
+        if (Math.abs(b.vel.x)>1.7){
              new Audio('./grzechotka_2.mp3').play();
         }
     } 
@@ -203,15 +204,27 @@ function zderzenie(b){
     if (b.pos.x >640-b.r){ 
         b.vel.x=-b.vel.x*coef_restitution
         b.pos.x-=b.pos.x-(right_wall-b.r)
+
+        if (Math.abs(b.vel.x)>1.7){
+            new Audio('./grzechotka_2.mp3').play();
+       }
     } 
 
     if (b.pos.y <0+b.r){
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y+=b.r-b.pos.y
+
+        if (Math.abs(b.vel.y)>1.7){
+            new Audio('./grzechotka_2.mp3').play();
+       }
     } 
     if (b.pos.y >480-b.r){ 
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y-=b.pos.y-(bottom_wall-b.r)
+
+        if (Math.abs(b.vel.y)>1.7){
+            new Audio('./grzechotka_2.mp3').play();
+       }
     
     } 
 }
@@ -308,7 +321,7 @@ function mainLoop(timestamp) {
     requestAnimationFrame(mainLoop);
 }
 
-for (let i = 0; i < 1; i++){
+for (let i = 0; i < 4; i++){
     let newBall = new Ball(randInt(100,500), randInt(50,400), randInt(20,50), randInt(0,10));
     newBall.elasticity = randInt(0,10) / 10;
 }
