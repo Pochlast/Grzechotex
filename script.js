@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 const BALLZ = [];
 const WALLZ = [];
 
+var audio = new Audio('grzechotka_2.mp3');
+
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
@@ -17,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 24;
+const wersja = 25;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -190,6 +192,7 @@ function zderzenie(b){
     if (b.pos.x <0+b.r){
          b.vel.x=-b.vel.x*coef_restitution
          b.pos.x+=b.r-b.pos.x
+         audio.play();
     } 
 
     if (b.pos.x >640-b.r){ 
@@ -300,7 +303,7 @@ function mainLoop(timestamp) {
     requestAnimationFrame(mainLoop);
 }
 
-for (let i = 0; i < 5; i++){
+for (let i = 0; i < 1; i++){
     let newBall = new Ball(randInt(100,500), randInt(50,400), randInt(20,50), randInt(0,10));
     newBall.elasticity = randInt(0,10) / 10;
 }
