@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 14;
+const wersja = 15;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -183,7 +183,11 @@ function coll_det_bb(b1, b2){
 }
 
 function zderzenie(b){
-    if (b.pos.x <0){ b.acc.x=-b.acc.x } 
+    if (b.pos.x <0+b.r){ b.acc.x=-b.acc.x } 
+    if (b.pos.x >640-b.r){ b.acc.x=-b.acc.x } 
+
+    if (b.pos.y <0+b.r){ b.acc.y=-b.acc.y } 
+    if (b.pos.y >480-b.r){ b.acc.y=-b.acc.y } 
 }
 
 
