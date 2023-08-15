@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 12;
+const wersja = 13;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -250,7 +250,7 @@ function mainLoop(timestamp) {
             acc_Control(b,new_acc_x,new_acc_y);
         }
         //each ball object iterates through each wall object
-        zderzenie(b);
+        zderzenie(BALLZ[index]);
 
         // WALLZ.forEach((w) => {
         //     if(coll_det_bw(BALLZ[index], w)){
