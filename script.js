@@ -9,7 +9,7 @@ const WALLZ = [];
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
-let coef_ability = 3;
+let coef_ability = 3.5;
 let right_wall=640;
 let bottom_wall=480;
 let vel_lim=3;
@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 33;
+const wersja = 35;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -187,6 +187,22 @@ function coll_det_bb(b1, b2){
     }
 }
 
+function Horizontal_coll(b){
+    if (b.soundAbilityHorizontal && Math.abs(b.vel.x)>vel_lim){
+        b.soundAbilityHorizontal = false;
+            if (b.pos.x > 1/3*right_wall && b.pos.x <2/3*right_wall){new Audio('./grzechotka_2.mp3').play(); } 
+        new Audio('./grzechotka_2.mp3').play();
+    }
+}
+
+function Vertical_coll(b){
+    if (b.soundAbilityHorizontal && Math.abs(b.vel.y)>vel_lim){
+        b.soundAbilityHorizontal = false;
+            if (b.pos.y > 1/3*bottom_wall && b.pos.y <2/3*bottom_wall){new Audio('./grzechotka_2.mp3').play(); } 
+        new Audio('./grzechotka_2.mp3').play();
+    }
+}
+
 function zderzenie(b){
 
     acc_x_test = Math.round(b.vel.y*100)/100;
@@ -196,43 +212,26 @@ function zderzenie(b){
     if (b.pos.x <0+b.r){
         b.vel.x=-b.vel.x*coef_restitution;
         b.pos.x+=b.r-b.pos.x;
-        //audio.play();
-
-        if (b.soundAbilityHorizontal && Math.abs(b.vel.x)>vel_lim){
-             new Audio('./grzechotka_2.mp3').play();
-             b.soundAbilityHorizontal = false;
-
-        }
+        Horizontal_coll(b)
     } 
 
     if (b.pos.x >640-b.r){ 
         b.vel.x=-b.vel.x*coef_restitution
         b.pos.x-=b.pos.x-(right_wall-b.r)
-
-        if (b.soundAbilityHorizontal && Math.abs(b.vel.x)>vel_lim){
-            new Audio('./grzechotka_2.mp3').play();
-            b.soundAbilityHorizontal = false;
-       }
+        Horizontal_coll(b)
     } 
 
     if (b.pos.y <0+b.r){
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y+=b.r-b.pos.y
-
-        if (b.soundAbilityVertical && Math.abs(b.vel.y)>vel_lim){
-            new Audio('./grzechotka_2.mp3').play();
-            b.soundAbilityVertical = false;
-       }
+        Vertical_coll(b)
+ 
     } 
     if (b.pos.y >480-b.r){ 
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y-=b.pos.y-(bottom_wall-b.r)
+        Vertical_coll(b)
 
-        if (b.soundAbilityVertical && Math.abs(b.vel.y)>vel_lim){
-            new Audio('./grzechotka_2.mp3').play();
-            b.soundAbilityVertical = false;
-       }
-    
     } 
 }
 
