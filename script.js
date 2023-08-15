@@ -6,6 +6,10 @@ const WALLZ = [];
 
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
+let coef_restitution = 0.90;
+
+let right_wall=640;
+let bottom_wall=480;
 
 const acl = new Accelerometer({ frequency: 600 });
 
@@ -13,7 +17,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 22;
+const wersja = 23;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -184,13 +188,24 @@ function coll_det_bb(b1, b2){
 
 function zderzenie(b){
     if (b.pos.x <0+b.r){
-         b.vel.x=-b.vel.x*0.90 
+         b.vel.x=-b.vel.x*coef_restitution
          b.pos.x+=b.r-b.pos.x
     } 
-    if (b.pos.x >640-b.r){ b.vel.x=-b.vel.x} 
 
-    if (b.pos.y <0+b.r){ b.vel.y=-b.vel.y} 
-    if (b.pos.y >480-b.r){ b.vel.y=-b.vel.y} 
+    if (b.pos.x >640-b.r){ 
+        b.vel.x=-b.vel.x*coef_restitution
+        b.pos.x-=b.pos.x-(right_wall-b.r)
+    } 
+
+    if (b.pos.y <0+b.r){
+        b.vel.y=-b.vel.y*coef_restitution
+        b.pos.y+=b.r-b.pos.y
+    } 
+    if (b.pos.y >480-b.r){ 
+        b.vel.y=-b.vel.y*coef_restitution
+        b.pos.y-=b.pos.y-(bottom_wall-b.r)
+    
+    } 
 }
 
 
