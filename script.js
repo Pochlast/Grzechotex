@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 const BALLZ = [];
 const WALLZ = [];
 
-var audio = new Audio('./grzechotka_2.mp3');
+//var audio = new Audio('./grzechotka_2.mp3');
 
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 26;
+const wersja = 27;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -192,7 +192,8 @@ function zderzenie(b){
     if (b.pos.x <0+b.r){
          b.vel.x=-b.vel.x*coef_restitution;
          b.pos.x+=b.r-b.pos.x;
-         audio.play();
+         //audio.play();
+         new Audio('./grzechotka_2.mp3').play();
     } 
 
     if (b.pos.x >640-b.r){ 
