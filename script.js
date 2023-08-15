@@ -12,14 +12,14 @@ let coef_restitution = 0.90;
 
 let right_wall=640;
 let bottom_wall=480;
-
+let vel_lim=3;
 const acl = new Accelerometer({ frequency: 600 });
 
 acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 30;
+const wersja = 31;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -196,7 +196,7 @@ function zderzenie(b){
         b.pos.x+=b.r-b.pos.x;
         //audio.play();
 
-        if (Math.abs(b.vel.x)>1.7){
+        if (Math.abs(b.vel.x)>vel_lim){
              new Audio('./grzechotka_2.mp3').play();
         }
     } 
@@ -205,7 +205,7 @@ function zderzenie(b){
         b.vel.x=-b.vel.x*coef_restitution
         b.pos.x-=b.pos.x-(right_wall-b.r)
 
-        if (Math.abs(b.vel.x)>1.7){
+        if (Math.abs(b.vel.x)>vel_lim){
             new Audio('./grzechotka_2.mp3').play();
        }
     } 
@@ -214,7 +214,7 @@ function zderzenie(b){
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y+=b.r-b.pos.y
 
-        if (Math.abs(b.vel.y)>1.7){
+        if (Math.abs(b.vel.y)>vel_lim){
             new Audio('./grzechotka_2.mp3').play();
        }
     } 
@@ -222,7 +222,7 @@ function zderzenie(b){
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y-=b.pos.y-(bottom_wall-b.r)
 
-        if (Math.abs(b.vel.y)>1.7){
+        if (Math.abs(b.vel.y)>vel_lim){
             new Audio('./grzechotka_2.mp3').play();
        }
     
