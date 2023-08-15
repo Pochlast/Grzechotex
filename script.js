@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 27;
+const wersja = 28;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -107,7 +107,7 @@ class Ball{
     display(){
         this.vel.drawVec(this.pos.x, this.pos.y, 10, "green");
         ctx.fillStyle = "black";
-        ctx.fillText("m = "+this.m, this.pos.x-10, this.pos.y-5);
+        ctx.fillText("v = "+this.vel.x, this.pos.x-10, this.pos.y-5);
         ctx.fillText("e = "+this.elasticity, this.pos.x-10, this.pos.y+5);
     }
 
@@ -189,11 +189,15 @@ function coll_det_bb(b1, b2){
 }
 
 function zderzenie(b){
+
     if (b.pos.x <0+b.r){
-         b.vel.x=-b.vel.x*coef_restitution;
-         b.pos.x+=b.r-b.pos.x;
-         //audio.play();
-         new Audio('./grzechotka_2.mp3').play();
+        b.vel.x=-b.vel.x*coef_restitution;
+        b.pos.x+=b.r-b.pos.x;
+        //audio.play();
+
+        // if (b.vel.x>){
+        //      new Audio('./grzechotka_2.mp3').play();
+        // }
     } 
 
     if (b.pos.x >640-b.r){ 
