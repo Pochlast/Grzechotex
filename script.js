@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 29;
+const wersja = 30;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -195,9 +195,9 @@ function zderzenie(b){
         b.pos.x+=b.r-b.pos.x;
         //audio.play();
 
-        // if (b.vel.x>){
-        //      new Audio('./grzechotka_2.mp3').play();
-        // }
+        if (Math.abs(b.vel.x)>1.65){
+             new Audio('./grzechotka_2.mp3').play();
+        }
     } 
 
     if (b.pos.x >640-b.r){ 
