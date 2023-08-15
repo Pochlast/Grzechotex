@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 31;
+const wersja = 32;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -91,6 +91,8 @@ class Ball{
         this.acc = new Vector(0,0);
         this.acceleration = 3;
         this.player = true;
+        this.soundAbilityHorizontal = true;
+        this.soundAbilityVertical = true;
         BALLZ.push(this);
     }
 
@@ -196,8 +198,10 @@ function zderzenie(b){
         b.pos.x+=b.r-b.pos.x;
         //audio.play();
 
-        if (Math.abs(b.vel.x)>vel_lim){
+        if (b.soundAbilityHorizontal && Math.abs(b.vel.x)>vel_lim){
              new Audio('./grzechotka_2.mp3').play();
+             b.soundAbilityHorizontal = false;
+
         }
     } 
 
@@ -205,8 +209,9 @@ function zderzenie(b){
         b.vel.x=-b.vel.x*coef_restitution
         b.pos.x-=b.pos.x-(right_wall-b.r)
 
-        if (Math.abs(b.vel.x)>vel_lim){
+        if (b.soundAbilityHorizontal && Math.abs(b.vel.x)>vel_lim){
             new Audio('./grzechotka_2.mp3').play();
+            b.soundAbilityHorizontal = false;
        }
     } 
 
@@ -214,21 +219,33 @@ function zderzenie(b){
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y+=b.r-b.pos.y
 
-        if (Math.abs(b.vel.y)>vel_lim){
+        if (b.soundAbilityVertical && Math.abs(b.vel.y)>vel_lim){
             new Audio('./grzechotka_2.mp3').play();
+            b.soundAbilityVertical = false;
        }
     } 
     if (b.pos.y >480-b.r){ 
         b.vel.y=-b.vel.y*coef_restitution
         b.pos.y-=b.pos.y-(bottom_wall-b.r)
 
-        if (Math.abs(b.vel.y)>vel_lim){
+        if (b.soundAbilityVertical && Math.abs(b.vel.y)>vel_lim){
             new Audio('./grzechotka_2.mp3').play();
+            b.soundAbilityVertical = false;
        }
     
     } 
 }
 
+
+function canPlaySound(b){
+    if (b.pos.x >0+2*b.r && b.pos.x <right_wall-2*b.r){
+        b.soundAbilityHorizontal = true;
+    }
+
+    if (b.pos.y >0+2*b.r && b.pos.y <bottom_wall-2*b.r){
+        b.soundAbilityHorizontal = true;
+    }
+}
 
 
 //collision detection between ball and wall
@@ -294,6 +311,8 @@ function mainLoop(timestamp) {
         }
         //each ball object iterates through each wall object
         zderzenie(BALLZ[index]);
+
+        canPlaySound(b);
 
         // WALLZ.forEach((w) => {
         //     if(coll_det_bw(BALLZ[index], w)){
