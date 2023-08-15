@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 10;
+const wersja = 11;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -135,7 +135,7 @@ class Wall{
     }
 }
 
-function keyControl(b,new_acc_x,new_acc_y){
+function acc_Control(b,new_acc_x,new_acc_y){
 
         //b.acc.x = acc_x-new_acc_x;
 
@@ -181,6 +181,12 @@ function coll_det_bb(b1, b2){
         return false;
     }
 }
+
+function zderzenie(b){
+    if (b.pos.x <0){ b.acc.x=-b.acc.x } 
+}
+
+
 
 //collision detection between ball and wall
 function coll_det_bw(b1, w1){
@@ -244,12 +250,14 @@ function mainLoop(timestamp) {
             keyControl(b,new_acc_x,new_acc_y);
         }
         //each ball object iterates through each wall object
-        WALLZ.forEach((w) => {
-            if(coll_det_bw(BALLZ[index], w)){
-                pen_res_bw(BALLZ[index], w);
-                coll_res_bw(BALLZ[index], w);
-            }
-        })
+        zderzenie(b);
+
+        // WALLZ.forEach((w) => {
+        //     if(coll_det_bw(BALLZ[index], w)){
+        //         pen_res_bw(BALLZ[index], w);
+        //         coll_res_bw(BALLZ[index], w);
+        //     }
+        // })
         for(let i = index+1; i<BALLZ.length; i++){
             if(coll_det_bb(BALLZ[index], BALLZ[i])){
                 pen_res_bb(BALLZ[index], BALLZ[i]);
@@ -274,7 +282,7 @@ for (let i = 0; i < 2; i++){
     let newBall = new Ball(randInt(100,500), randInt(50,400), randInt(20,50), randInt(0,10));
     newBall.elasticity = randInt(0,10) / 10;
 }
-let Wall2 = new Wall(300, 400, 550, 200);
+//let Wall2 = new Wall(300, 400, 550, 200);
 
 //walls along the canvas edges
 let edge1 = new Wall(0, 0, canvas.clientWidth, 0);
