@@ -185,7 +185,7 @@ function coll_det_bb(b1, b2){
 function zderzenie(b){
     if (b.pos.x <0+b.r){
          b.vel.x=-b.vel.x*0.90 
-         b.pos.x+=b.r
+         b.pos.x+=b.pos.x-b.r
     } 
     if (b.pos.x >640-b.r){ b.vel.x=-b.vel.x} 
 
