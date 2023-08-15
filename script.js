@@ -9,7 +9,7 @@ const WALLZ = [];
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
-
+let coef_ability = 3;
 let right_wall=640;
 let bottom_wall=480;
 let vel_lim=3;
@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 32;
+const wersja = 33;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -238,11 +238,11 @@ function zderzenie(b){
 
 
 function canPlaySound(b){
-    if (b.pos.x >0+2*b.r && b.pos.x <right_wall-2*b.r){
+    if (b.pos.x >0+coef_ability*b.r && b.pos.x <right_wall-coef_ability*b.r){
         b.soundAbilityHorizontal = true;
     }
 
-    if (b.pos.y >0+2*b.r && b.pos.y <bottom_wall-2*b.r){
+    if (b.pos.y >0+coef_ability*b.r && b.pos.y <bottom_wall-coef_ability*b.r){
         b.soundAbilityHorizontal = true;
     }
 }
