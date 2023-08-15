@@ -19,7 +19,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 28;
+const wersja = 29;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -149,9 +149,6 @@ function acc_Control(b,new_acc_x,new_acc_y){
         b.acc.x=-acl.x;
         b.acc.y=acl.y;
 
-        acc_x_test = acl.x
-        document.getElementsByClassName("acc_x_test")[0].innerHTML=acc_x_test
-
 }
 
 function round(number, precision){
@@ -189,6 +186,9 @@ function coll_det_bb(b1, b2){
 }
 
 function zderzenie(b){
+
+    acc_x_test = Math.round(b.vel.x*100)/100;
+    document.getElementsByClassName("acc_x_test")[0].innerHTML=acc_x_test
 
     if (b.pos.x <0+b.r){
         b.vel.x=-b.vel.x*coef_restitution;
