@@ -5,7 +5,7 @@ const BALLZ = [];
 const WALLZ = [];
 
 let LEFT, UP, RIGHT, DOWN;
-let friction = 0.0001;
+let friction = 0.001;
 
 const acl = new Accelerometer({ frequency: 600 });
 
@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 19;
+const wersja = 20;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -184,7 +184,7 @@ function coll_det_bb(b1, b2){
 
 function zderzenie(b){
     if (b.pos.x <0+b.r){
-         b.vel.x=-b.vel.x*0.95 
+         b.vel.x=-b.vel.x*0.90 
          b.pos.x+=b.r
     } 
     if (b.pos.x >640-b.r){ b.vel.x=-b.vel.x} 
@@ -285,7 +285,7 @@ function mainLoop(timestamp) {
     requestAnimationFrame(mainLoop);
 }
 
-for (let i = 0; i < 2; i++){
+for (let i = 0; i < 1; i++){
     let newBall = new Ball(randInt(100,500), randInt(50,400), randInt(20,50), randInt(0,10));
     newBall.elasticity = randInt(0,10) / 10;
 }
