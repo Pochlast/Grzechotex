@@ -13,7 +13,7 @@ acl.start();
 
 let acc_x_test= 0;
 
-const wersja = 11;
+const wersja = 12;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
