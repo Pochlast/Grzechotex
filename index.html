@@ -1,32 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        #canvas{
-            border: 1px solid black;
-            display: block;
-            margin: 0 auto;
-            background: #fffacc;
-        }
-
-        .wersja{
-            text-align:center
-        }
-
-        .acc_x{
-            text-align:center
-        }
-    </style>
-    <title>Adding the Walls</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <title>Grzechotex</title>
 </head>
+
 <body>
-    <div class="wersja"></div>
-    <div class="acc_x_test"></div>
+    <div class="nav">
+        <button class="home">Home</button>
+    </div>
 
-    <canvas id="canvas" tabindex=0 width="640" height="480"></canvas>
+    <div class="home-view">
+        <div class="quantity-input">
+            <label for="quantity">Quantity</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="5" value="1" />
+        </div>
 
-    <script src="script.js"></script>
+        <div class="size-btns">
+            <input type="radio" id="one" name="size" checked />
+            <label for="one">One size</label>
+            <input type="radio" id="many" name="size" />
+            <label for="many">Different sizes</label>
+        </div>
+
+        <button class="play-btn">Play</button>
+    </div>
+
+    <div class="rattle-view">
+        <div class="wersja"></div>
+        <div class="acc_x_test"></div>
+
+        <canvas id="canvas" tabindex=0 width="640" height="480"></canvas>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="rattle.js"></script>
 </body>
+
 </html>
