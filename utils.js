@@ -1,7 +1,11 @@
 document.querySelector(".home").addEventListener('click', goHome)
 document.querySelector(".play-btn").addEventListener('click', startRattle)
 
-export let view = 'home'
+export const props = {
+    view: 'home',
+    quantity: 0,
+    size: ''
+}
 
 function goHome() {
     let quantity = document.querySelector("#quantity").value;
@@ -13,7 +17,7 @@ function goHome() {
 
     document.querySelector(".home-view").style["display"] = "block";
     document.querySelector(".rattle-view").style["display"] = "none";
-    view = 'home'
+    props.view = 'home'
 }
 
 document.querySelector("#quantity").oninput = function () {
@@ -30,5 +34,7 @@ function startRattle() {
 
     document.querySelector(".home-view").style["display"] = "none";
     document.querySelector(".rattle-view").style["display"] = "block";
-    view = 'rattle'
+    props.view = 'rattle'
+    props.quantity = quantity
+    props.size = size
 }

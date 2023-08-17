@@ -1,14 +1,12 @@
-import {view} from "./utils";
+import {props} from "./utils";
 
+console.log('view', props.view)
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 const BALLZ = [];
 const WALLZ = [];
 
-//var audio = new Audio('./grzechotka_2.mp3');
-
-let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
@@ -22,9 +20,6 @@ acl.start();
 let acc_x_test = 0;
 
 const wersja = 35;
-
-let acc_x = -acl.x;
-let acc_y = acl.y;
 
 document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
 
@@ -341,8 +336,8 @@ function mainLoop(timestamp) {
     requestAnimationFrame(mainLoop);
 }
 
-for (let i = 0; i < 4; i++) {
-    let newBall = new Ball(randInt(100, 500), randInt(50, 400), randInt(20, 50), randInt(0, 10));
+for (let i = 0; i < props.quantity; i++) {
+    let newBall = new Ball(randInt(100, 500), props.size ? 50 : randInt(50, 400), randInt(20, 50), randInt(0, 10));
     newBall.elasticity = randInt(0, 10) / 10;
 }
 //let Wall2 = new Wall(300, 400, 550, 200);
@@ -365,7 +360,4 @@ BALLZ[0].player = true;
 // Ball1.vel.x = 290;
 
 
-if(view == 'rattle'){
-    requestAnimationFrame(mainLoop);
-}
-console.log('view', view)
+requestAnimationFrame(mainLoop);
