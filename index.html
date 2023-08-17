@@ -18,8 +18,8 @@
 
     <div class="home-view">
         <div class="quantity-input">
-            <label for="quantity">Quantity</label>
-            <input type="number" id="quantity" name="quantity" min="1" max="5" value="1" />
+            <label for="quantity">Quantity: <span class="quantity-range">1</span></label>
+            <input type="range" id="quantity" name="quantity" min="1" max="8" step="1" value="1" />
         </div>
 
         <div class="size-btns">
@@ -39,8 +39,8 @@
         <canvas id="canvas" tabindex=0 width="640" height="480"></canvas>
     </div>
 
-    <script src="utils.js"></script>
-    <script src="rattle.js"></script>
+    <script type="module" src="./utils.js"></script>
+    <script type="module" src="./rattle.js"></script>
 </body>
 
 </html>

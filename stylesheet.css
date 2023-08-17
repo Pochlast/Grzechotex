@@ -1,32 +1,43 @@
-body{
+body {
     margin: 0;
     font-family: 'PT Serif', serif;
 }
 
-.nav, .home-view{
+.nav,
+.home-view {
     text-align: center;
+    vertical-align: middle;
     padding: 1rem;
 }
 
-.home-view *{
-    padding: 0.5rem;
+.home-view {
+    >* {
+        padding: 0.5rem;
+    }
+
+    .quantity-input label,
+    .quantity-input input {
+        vertical-align: middle;
+        padding: 0px;
+        margin: 0px;
+    }
 }
 
-.rattle-view{
+.rattle-view {
     display: none;
 }
 
-#canvas{
+#canvas {
     border: 1px solid black;
     display: block;
     margin: 0 auto;
     background: #fffacc;
 }
 
-.wersja{
-    text-align:center;
+.wersja {
+    text-align: center;
 }
 
-.acc_x{
-    text-align:center;
+.acc_x_test {
+    text-align: center;
 }
