@@ -368,3 +368,4 @@ BALLZ[0].player = true;
 if(view == 'rattle'){
     requestAnimationFrame(mainLoop);
 }
+console.log('view', view)
