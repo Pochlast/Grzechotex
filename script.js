@@ -1,12 +1,50 @@
-import {props} from "./utils";
+document.querySelector(".home").addEventListener('click', goHome)
+document.querySelector(".play-btn").addEventListener('click', startRattle)
 
-console.log('view', props.view)
+function goHome() {
+    document.querySelector(".home-view").style["display"] = "block";
+    document.querySelector(".rattle-view").style["display"] = "none";
+
+    BALLZ = []
+    WALLZ = []
+}
+
+document.querySelector("#quantity").oninput = function () {
+    document.querySelector(".quantity-range").innerHTML = this.value;
+}
+
+function startRattle() {
+    let quantity = document.querySelector("#quantity").value;
+    let size = document.querySelector("#one").checked;
+
+    console.log(quantity);
+    console.log(size);
+    document.querySelector(".home-view").style["display"] = "none";
+    document.querySelector(".rattle-view").style["display"] = "block";
+
+    for (let i = 0; i < quantity; i++) {
+        let newBall = new Ball(randInt(100, 500), randInt(50, 400), size ? 20 : randInt(20, 50), randInt(0, 10));
+        newBall.elasticity = randInt(0, 10) / 10;
+    }
+
+    let edge1 = new Wall(0, 0, canvas.clientWidth, 0);
+    let edge2 = new Wall(canvas.clientWidth, 0, canvas.clientWidth, canvas.clientHeight);
+    let edge3 = new Wall(canvas.clientWidth, canvas.clientHeight, 0, canvas.clientHeight);
+    let edge4 = new Wall(0, canvas.clientHeight, 0, 0);
+    BALLZ[0].player = true;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-const BALLZ = [];
-const WALLZ = [];
+let BALLZ = [];
+let WALLZ = [];
 
+//var audio = new Audio('./grzechotka_2.mp3');
+
+let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
@@ -20,6 +58,10 @@ acl.start();
 let acc_x_test = 0;
 
 const wersja = 35;
+
+let acc_x = -acl.x;
+let acc_y = acl.y;
+
 
 document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
 
@@ -336,18 +378,9 @@ function mainLoop(timestamp) {
     requestAnimationFrame(mainLoop);
 }
 
-for (let i = 0; i < props.quantity; i++) {
-    let newBall = new Ball(randInt(100, 500), props.size ? 50 : randInt(50, 400), randInt(20, 50), randInt(0, 10));
-    newBall.elasticity = randInt(0, 10) / 10;
-}
 //let Wall2 = new Wall(300, 400, 550, 200);
 
 //walls along the canvas edges
-let edge1 = new Wall(0, 0, canvas.clientWidth, 0);
-let edge2 = new Wall(canvas.clientWidth, 0, canvas.clientWidth, canvas.clientHeight);
-let edge3 = new Wall(canvas.clientWidth, canvas.clientHeight, 0, canvas.clientHeight);
-let edge4 = new Wall(0, canvas.clientHeight, 0, 0);
-BALLZ[0].player = true;
 
 //intro if canvas 1138x640
 // let Wall1 = new Wall(1000, 350, 1100, 500);
