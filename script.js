@@ -375,7 +375,10 @@ function mainLoop(timestamp) {
     WALLZ.forEach((w) => {
         w.drawWall();
     })
-    document.getElementsByClassName("wersja")[0].innerHTML += acl.x+','+acl.y +';'
+
+
+
+    document.getElementsByClassName("wersja")[0].innerHTML = 
     requestAnimationFrame(mainLoop);
 }
 
@@ -393,5 +396,17 @@ function mainLoop(timestamp) {
 // let Ball45= new Ball(500, 340, 30, 2);
 // Ball1.vel.x = 290;
 
+let fpsInterval = 1000 / fps;
+let then = Date.now();
+let startTime = then;
+let now, elapsed
 
-requestAnimationFrame(mainLoop);
+function animate(){
+    now = Date.now();
+    elapsed = now - then;
+    if (elapsed > fpsInterval) {
+        then = now - (elapsed % fpsInterval);
+        requestAnimationFrame(mainLoop);
+    }
+
+}
