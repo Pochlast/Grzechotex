@@ -380,7 +380,7 @@ function mainLoop(timestamp) {
 
 
     document.getElementsByClassName("wersja")[0].innerHTML = elapsed
-    animate()
+
 }
 
 //let Wall2 = new Wall(300, 400, 550, 200);
@@ -404,6 +404,7 @@ let startTime = then;
 let now, elapsed
 
 function animate(){
+    console.log('kasztan',elapsed)
     now = Date.now();
     elapsed = now - then;
     if (elapsed > fpsInterval) {
