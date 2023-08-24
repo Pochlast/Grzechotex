@@ -59,6 +59,7 @@ acl.start();
 let acc_x_test = 0;
 
 //const wersja = 35;
+let wersja =0
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
