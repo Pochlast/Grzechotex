@@ -1,4 +1,4 @@
-document.querySelector(".home").addEventListener('click', goHome)
+document.querySelector(".home-btn").addEventListener('click', goHome)
 document.querySelector(".play-btn").addEventListener('click', startRattle)
 
 function goHome() {
