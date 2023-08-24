@@ -380,7 +380,7 @@ function mainLoop(timestamp) {
 
 
     document.getElementsByClassName("wersja")[0].innerHTML = elapsed
-    requestAnimationFrame(mainLoop);
+    animate()
 }
 
 //let Wall2 = new Wall(300, 400, 550, 200);
@@ -410,7 +410,7 @@ function animate(){
         then = now - (elapsed % fpsInterval);
         requestAnimationFrame(mainLoop);
     }
-
+    animate()
 }
 
 animate()
