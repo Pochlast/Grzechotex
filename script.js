@@ -13,6 +13,7 @@ document.querySelector("#quantity").oninput = function () {
     document.querySelector(".quantity-range").innerHTML = this.value;
 }
 
+
 function startRattle() {
     let quantity = document.querySelector("#quantity").value;
     let size = document.querySelector("#one").checked;
@@ -374,7 +375,7 @@ function mainLoop(timestamp) {
     WALLZ.forEach((w) => {
         w.drawWall();
     })
-
+    document.getElementsByClassName("wersja")[0].innerHTML += acl.x+','+acl.y +';'
     requestAnimationFrame(mainLoop);
 }
 
