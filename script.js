@@ -378,7 +378,7 @@ function mainLoop(timestamp) {
 
 
 
-    document.getElementsByClassName("wersja")[0].innerHTML = 
+    document.getElementsByClassName("wersja")[0].innerHTML = elapsed
     requestAnimationFrame(mainLoop);
 }
 
@@ -396,6 +396,7 @@ function mainLoop(timestamp) {
 // let Ball45= new Ball(500, 340, 30, 2);
 // Ball1.vel.x = 290;
 
+let fps = 60
 let fpsInterval = 1000 / fps;
 let then = Date.now();
 let startTime = then;
