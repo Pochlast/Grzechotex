@@ -46,7 +46,6 @@ let WALLZ = [];
 
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
-let coef_wall = 0.90;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
 let right_wall = 640;
@@ -58,7 +57,7 @@ acl.start();
 
 let acc_x_test = 0;
 
-let wersja
+const wersja = 35;
 
 let acc_x = -acl.x;
 let acc_y = acl.y;
@@ -66,6 +65,7 @@ let acc_y = acl.y;
 
 document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
 
+document.getElementsByClassName("wersja")[0].innerHTML = wersja
 
 class Vector {
     constructor(x, y) {
@@ -250,28 +250,24 @@ function zderzenie(b) {
 
     if (b.pos.x < 0 + b.r) {
         b.vel.x = -b.vel.x * coef_restitution;
-        b.vel.y = b.vel.y * coef_wall
         b.pos.x += b.r - b.pos.x;
         Horizontal_coll(b)
     }
 
     if (b.pos.x > 640 - b.r) {
         b.vel.x = -b.vel.x * coef_restitution
-        b.vel.y = b.vel.y * coef_wall
         b.pos.x -= b.pos.x - (right_wall - b.r)
         Horizontal_coll(b)
     }
 
     if (b.pos.y < 0 + b.r) {
         b.vel.y = -b.vel.y * coef_restitution
-        b.vel.x = b.vel.x * coef_wall
         b.pos.y += b.r - b.pos.y
         Vertical_coll(b)
 
     }
     if (b.pos.y > 480 - b.r) {
         b.vel.y = -b.vel.y * coef_restitution
-        b.vel.x = b.vel.x * coef_wall
         b.pos.y -= b.pos.y - (bottom_wall - b.r)
         Vertical_coll(b)
 
@@ -340,72 +336,48 @@ function momentum_display() {
     ctx.fillText("Momentum: " + round(momentum, 4), 500, 330);
 }
 
+function mainLoop(timestamp) {
+    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
+    BALLZ.forEach((b, index) => {
+        let new_acc_x = -acl.x;
+        let new_acc_y = acl.y;
 
-function animate() {
+        b.drawBall();
+        if (b.player) {
+            acc_Control(b, new_acc_x, new_acc_y);
+        }
+        //each ball object iterates through each wall object
+        zderzenie(BALLZ[index]);
 
-    // request another frame
+        canPlaySound(b);
 
-    requestAnimationFrame(animate);
+        // WALLZ.forEach((w) => {
+        //     if(coll_det_bw(BALLZ[index], w)){
+        //         pen_res_bw(BALLZ[index], w);
+        //         coll_res_bw(BALLZ[index], w);
+        //     }
+        // })
+        for (let i = index + 1; i < BALLZ.length; i++) {
+            if (coll_det_bb(BALLZ[index], BALLZ[i])) {
+                pen_res_bb(BALLZ[index], BALLZ[i]);
+                coll_res_bb(BALLZ[index], BALLZ[i]);
+            }
+        }
+        b.display();
+        b.reposition();
+    });
 
-    // calc elapsed time since last loop
+    acc_x = -acl.x;
+    acc_y = acl.y;
+    //drawing each wall on the canvas
+    WALLZ.forEach((w) => {
+        w.drawWall();
+    })
 
-    now = Date.now();
-    elapsed = now - then;
-
-    // if enough time has elapsed, draw the next frame
-
-    if (elapsed > fpsInterval) {
-
-        // Get ready for next frame by setting then=now, but also adjust for your
-        // specified fpsInterval not being a multiple of RAF's interval (16.7ms)
-        then = now - (elapsed % fpsInterval);
-
-            ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-        
-            BALLZ.forEach((b, index) => {
-                let new_acc_x = -acl.x;
-                let new_acc_y = acl.y;
-        
-                b.drawBall();
-                if (b.player) {
-                    acc_Control(b, new_acc_x, new_acc_y);
-                }
-                //each ball object iterates through each wall object
-                zderzenie(BALLZ[index]);
-        
-                canPlaySound(b);
-        
-                // WALLZ.forEach((w) => {
-                //     if(coll_det_bw(BALLZ[index], w)){
-                //         pen_res_bw(BALLZ[index], w);
-                //         coll_res_bw(BALLZ[index], w);
-                //     }
-                // })
-                for (let i = index + 1; i < BALLZ.length; i++) {
-                    if (coll_det_bb(BALLZ[index], BALLZ[i])) {
-                        pen_res_bb(BALLZ[index], BALLZ[i]);
-                        coll_res_bb(BALLZ[index], BALLZ[i]);
-                    }
-                }
-                b.display();
-                b.reposition();
-            });
-        
-            acc_x = -acl.x;
-            acc_y = acl.y;
-            //drawing each wall on the canvas
-            WALLZ.forEach((w) => {
-                w.drawWall();
-            })
-            //document.getElementsByClassName("wersja")[0].innerHTML += acl.x.toFixed(4) +','+acl.y.toFixed(4)+acl.z.toFixed(4)+';'
-            //document.getElementsByClassName("wersja")[0].innerHTML += ';'
-
-            requestAnimationFrame(animate);
-        
-
-    }
+    requestAnimationFrame(mainLoop);
 }
+
 //let Wall2 = new Wall(300, 400, 550, 200);
 
 //walls along the canvas edges
@@ -419,19 +391,6 @@ function animate() {
 // let Ball4 = new Ball(1120, 590, 10, 1);
 // let Ball45= new Ball(500, 340, 30, 2);
 // Ball1.vel.x = 290;
-var stop = false;
-var frameCount = 0;
-var fps, fpsInterval, startTime, now, then, elapsed;
-
-let counterZderzen = 0
-
-setTimeout(() => {startAnimating(90)}, 2000);
-
-function startAnimating(fps) {
-    fpsInterval = 1000 / fps;
-    then = Date.now();
-    startTime = then;
-    animate();
-}
 
 
+requestAnimationFrame(mainLoop);
