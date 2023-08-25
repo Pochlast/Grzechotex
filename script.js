@@ -432,7 +432,6 @@ function startAnimating(fps) {
     then = Date.now();
     startTime = then;
     animate();
-    console.log('start',then)
 }
 
 
