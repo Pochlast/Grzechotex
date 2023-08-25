@@ -50,13 +50,12 @@ let coef_restitution = 0.90;
 let coef_ability = 3.5;
 
 
+let wall_width = window.innerWidth-100;
+let wall_height = window.innerHeight-200;
 
-let right_wall = screen.width-100;
-let bottom_wall = screen.height-100;
+canvas.width = wall_width
+canvas.height = wall_height
 
-ctx.canvas.width  = window.right_wall;
-ctx.canvas.height = window.bottom_wall;
-console.log(bottom_wall)
 let vel_lim = 3;
 const acl = new Accelerometer({ frequency: 600 });
 
@@ -236,7 +235,7 @@ function coll_det_bb(b1, b2) {
 function Horizontal_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.x) > vel_lim) {
         b.soundAbilityHorizontal = false;
-        if (b.pos.x > 1 / 3 * right_wall && b.pos.x < 2 / 3 * right_wall) { new Audio('./grzechotka_2.mp3').play(); }
+        if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { new Audio('./grzechotka_2.mp3').play(); }
         new Audio('./grzechotka_2.mp3').play();
     }
 }
@@ -244,7 +243,7 @@ function Horizontal_coll(b) {
 function Vertical_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.y) > vel_lim) {
         b.soundAbilityHorizontal = false;
-        if (b.pos.y > 1 / 3 * bottom_wall && b.pos.y < 2 / 3 * bottom_wall) { new Audio('./grzechotka_2.mp3').play(); }
+        if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { new Audio('./grzechotka_2.mp3').play(); }
         new Audio('./grzechotka_2.mp3').play();
     }
 }
@@ -261,9 +260,9 @@ function zderzenie(b) {
         Horizontal_coll(b)
     }
 
-    if (b.pos.x > right_wall - b.r) {
+    if (b.pos.x > wall_width - b.r) {
         b.vel.x = -b.vel.x * coef_restitution
-        b.pos.x -= b.pos.x - (right_wall - b.r)
+        b.pos.x -= b.pos.x - (wall_width - b.r)
         Horizontal_coll(b)
     }
 
@@ -273,9 +272,9 @@ function zderzenie(b) {
         Vertical_coll(b)
 
     }
-    if (b.pos.y > bottom_wall - b.r) {
+    if (b.pos.y > wall_height - b.r) {
         b.vel.y = -b.vel.y * coef_restitution
-        b.pos.y -= b.pos.y - (bottom_wall - b.r)
+        b.pos.y -= b.pos.y - (wall_height - b.r)
         Vertical_coll(b)
 
     }
@@ -283,11 +282,11 @@ function zderzenie(b) {
 
 
 function canPlaySound(b) {
-    if (b.pos.x > 0 + coef_ability * b.r && b.pos.x < right_wall - coef_ability * b.r) {
+    if (b.pos.x > 0 + coef_ability * b.r && b.pos.x < wall_width - coef_ability * b.r) {
         b.soundAbilityHorizontal = true;
     }
 
-    if (b.pos.y > 0 + coef_ability * b.r && b.pos.y < bottom_wall - coef_ability * b.r) {
+    if (b.pos.y > 0 + coef_ability * b.r && b.pos.y < wall_height - coef_ability * b.r) {
         b.soundAbilityHorizontal = true;
     }
 }

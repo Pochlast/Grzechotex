@@ -2,10 +2,9 @@ body {
   margin: 0;
   font-family: 'PT Serif', serif;
   font-size: x-large;
-  /* background: linear-gradient(-45deg, #9852ee, #21a0cf, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 20s ease infinite; */
-  height: 100vh;
+  background-color: #21a0cf;
+  height: 100%;
+  width: 100%;
 }
 
 @keyframes gradient {
@@ -26,7 +25,6 @@ body {
 
 .nav,
 .home-view {
-  margin: 5vh auto 0 auto;
   border-radius: 15px;
   text-align: center;
   justify-content: center;
@@ -37,8 +35,15 @@ body {
   background-color: #fff;
 }
 
+.nav{
+  margin: 3vh auto;
+}
+.home-view{
+  margin: 3vh auto;
+}
+
 .home-view {
-  padding: 5rem 1rem;
+  padding: 4rem 1rem;
 
   .quantity-input label,
   .quantity-input input {
@@ -76,7 +81,7 @@ button {
 }
 
 .home-btn{
-  margin: 2rem;
+  margin: 1rem;
 }
  .play-btn {
   margin-top: 10rem;
