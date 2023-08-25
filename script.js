@@ -252,7 +252,7 @@ function zderzenie(b) {
 
     acc_x_test = Math.round(b.vel.y * 100) / 100;
 
-    document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
+    //document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
 
     if (b.pos.x < 0 + b.r) {
         b.vel.x = -b.vel.x * coef_restitution;
