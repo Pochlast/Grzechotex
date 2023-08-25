@@ -35,9 +35,13 @@ function startRattle() {
 }
 
 document.querySelector(".rattle-btns").onclick = function(e){
-    console.log(e.target);
-    e.target.classList.toggle("target");
-  }
+    console.log(document.querySelectorAll(".rattle-btns img")[0].classList.contains('target'));
+    document.querySelectorAll(".rattle-btns img")[0].classList.remove("target")
+    document.querySelectorAll(".rattle-btns img")[1].classList.remove("target")
+    document.querySelectorAll(".rattle-btns img")[2].classList.remove("target")
+
+    e.target.classList.add("target");
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
