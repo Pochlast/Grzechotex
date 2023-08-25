@@ -394,7 +394,7 @@ function animate() {
                 w.drawWall();
             })
             console.log('gra',now)
-            document.getElementsByClassName("wersja")[0].innerHTML += acl.x.toFixed(2) +';'
+            document.getElementsByClassName("wersja")[0].innerHTML += acl.x.toFixed(4) +','+acl.y.toFixed(4)+acl.z.toFixed(4)+';'
             //document.getElementsByClassName("wersja")[0].innerHTML += ';'
 
             requestAnimationFrame(animate);
@@ -419,7 +419,9 @@ var stop = false;
 var frameCount = 0;
 var fps, fpsInterval, startTime, now, then, elapsed;
 
-setTimeout(() => {startAnimating(60)}, 2000);
+let counterZderzen = 0
+
+setTimeout(() => {startAnimating(90)}, 2000);
 
 function startAnimating(fps) {
     fpsInterval = 1000 / fps;
