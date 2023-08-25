@@ -53,8 +53,8 @@ let coef_ability = 3.5;
 let wall_width = window.innerWidth-100;
 let wall_height = window.innerHeight-200;
 
-canvas.width = wall_width
-canvas.height = wall_height
+ctx.canvas.width = wall_width
+ctx.canvas.height = wall_height
 
 let vel_lim = 3;
 const acl = new Accelerometer({ frequency: 600 });
@@ -69,9 +69,9 @@ let acc_x = -acl.x;
 let acc_y = acl.y;
 
 
-document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
+//document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
 
-document.getElementsByClassName("wersja")[0].innerHTML = wersja
+//document.getElementsByClassName("wersja")[0].innerHTML = wersja
 
 class Vector {
     constructor(x, y) {
@@ -381,6 +381,18 @@ function mainLoop(timestamp) {
     WALLZ.forEach((w) => {
         w.drawWall();
     })
+
+
+
+    ctx.beginPath();
+    ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
+
+
 
     requestAnimationFrame(mainLoop);
 }
