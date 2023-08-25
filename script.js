@@ -48,8 +48,13 @@ let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
-let right_wall = 640;
-let bottom_wall = 480;
+
+
+
+let right_wall = screen.width;
+let bottom_wall = screen.height;
+
+
 let vel_lim = 3;
 const acl = new Accelerometer({ frequency: 600 });
 
