@@ -34,6 +34,11 @@ function startRattle() {
     BALLZ[0].player = true;
 }
 
+document.querySelector(".rattle-btns").onclick = function(e){
+    console.log(e.target);
+    e.target.classList.toggle("target");
+  }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const canvas = document.getElementById('canvas');

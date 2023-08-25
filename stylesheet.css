@@ -63,6 +63,20 @@ body {
   }
 }
 
+.rattle-btns{
+  display: flex;
+  justify-content: center;
+  height: 35vw;
+  border-radius: 10px;
+  .rattle-btn{
+    padding: 2rem;
+  }
+}
+.target{
+  opacity: 1;
+  box-shadow: 0 5px #666;
+}
+
 button {
   color: #fff;
   background-color: #23d5ab;
@@ -84,7 +98,7 @@ button {
   margin: 1rem;
 }
  .play-btn {
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 
 /* ////////////////////////////////////////////////// */
