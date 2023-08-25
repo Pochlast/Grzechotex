@@ -384,15 +384,6 @@ function mainLoop(timestamp) {
 
 
 
-    ctx.beginPath();
-    ctx.arc(100, 100, 50, 0, 2 * Math.PI);
-    ctx.strokeStyle = "black";
-    ctx.stroke();
-    ctx.fillStyle = "red";
-    ctx.fill();
-    ctx.closePath();
-
-
 
     requestAnimationFrame(mainLoop);
 }
