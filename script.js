@@ -394,7 +394,7 @@ function animate() {
                 w.drawWall();
             })
             console.log('gra',now)
-            document.getElementsByClassName("wersja")[0].innerHTML += acl.x.toFixed(4) +','+acl.y.toFixed(4)+acl.z.toFixed(4)+';'
+            //document.getElementsByClassName("wersja")[0].innerHTML += acl.x.toFixed(4) +','+acl.y.toFixed(4)+acl.z.toFixed(4)+';'
             //document.getElementsByClassName("wersja")[0].innerHTML += ';'
 
             requestAnimationFrame(animate);
