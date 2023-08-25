@@ -2,9 +2,9 @@ body {
   margin: 0;
   font-family: 'PT Serif', serif;
   font-size: x-large;
-  background: linear-gradient(-45deg, #9852ee, #21a0cf, #23d5ab);
+  /* background: linear-gradient(-45deg, #9852ee, #21a0cf, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 20s ease infinite;
+  animation: gradient 20s ease infinite; */
   height: 100vh;
 }
 
