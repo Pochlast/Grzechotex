@@ -50,6 +50,11 @@ let coef_restitution = 0.90;
 let coef_ability = 3.5;
 
 
+var devicePixelRatio = window.devicePixelRatio || 1;
+dpi_x = document.getElementById('testdiv').offsetWidth * devicePixelRatio;
+dpi_y = document.getElementById('testdiv').offsetHeight * devicePixelRatio;
+console.log(dpi_x, dpi_y);
+
 let wall_width = window.innerWidth-40;
 let wall_height = window.innerHeight-140;
 
@@ -134,7 +139,7 @@ class Ball {
         this.elasticity = 1;
         this.vel = new Vector(0, 0);
         this.acc = new Vector(0, 0);
-        this.acceleration = 3;
+        this.acceleration = 1; //bylo 3
         this.player = true;
         this.soundAbilityHorizontal = true;
         this.soundAbilityVertical = true;
@@ -188,13 +193,13 @@ class Wall {
     }
 }
 
-function acc_Control(b, new_acc_x, new_acc_y) {
+function acc_Control(b) {
 
     //b.acc.x = acc_x-new_acc_x;
 
     //b.acc.y = acc_y-new_acc_y;
-    b.acc.x = -acl.x;
-    b.acc.y = acl.y;
+    b.acc.x = -acl.x*dpi_x*2.54;
+    b.acc.y = acl.y*dpi_x*2.54;
 
 }
 
@@ -347,12 +352,10 @@ function mainLoop(timestamp) {
     
 
     BALLZ.forEach((b, index) => {
-        let new_acc_x = -acl.x;
-        let new_acc_y = acl.y;
 
         b.drawBall();
         if (b.player) {
-            acc_Control(b, new_acc_x, new_acc_y);
+            acc_Control(b);
         }
         //each ball object iterates through each wall object
         zderzenie(BALLZ[index]);
@@ -384,9 +387,10 @@ function mainLoop(timestamp) {
 
 
 
-
+    
     requestAnimationFrame(mainLoop);
 }
+
 
 //let Wall2 = new Wall(300, 400, 550, 200);
 
