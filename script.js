@@ -50,8 +50,8 @@ let coef_restitution = 0.90;
 let coef_ability = 3.5;
 
 
-let wall_width = window.innerWidth-100;
-let wall_height = window.innerHeight-200;
+let wall_width = window.innerWidth-40;
+let wall_height = window.innerHeight-140;
 
 ctx.canvas.width = wall_width
 ctx.canvas.height = wall_height
