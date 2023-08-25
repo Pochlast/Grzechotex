@@ -46,6 +46,7 @@ let WALLZ = [];
 
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
+let coef_wall = 0.90;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
 let right_wall = 640;
@@ -249,24 +250,28 @@ function zderzenie(b) {
 
     if (b.pos.x < 0 + b.r) {
         b.vel.x = -b.vel.x * coef_restitution;
+        b.vel.y = b.vel.y * coef_wall
         b.pos.x += b.r - b.pos.x;
         Horizontal_coll(b)
     }
 
     if (b.pos.x > 640 - b.r) {
         b.vel.x = -b.vel.x * coef_restitution
+        b.vel.y = b.vel.y * coef_wall
         b.pos.x -= b.pos.x - (right_wall - b.r)
         Horizontal_coll(b)
     }
 
     if (b.pos.y < 0 + b.r) {
         b.vel.y = -b.vel.y * coef_restitution
+        b.vel.x = b.vel.x * coef_wall
         b.pos.y += b.r - b.pos.y
         Vertical_coll(b)
 
     }
     if (b.pos.y > 480 - b.r) {
         b.vel.y = -b.vel.y * coef_restitution
+        b.vel.x = b.vel.x * coef_wall
         b.pos.y -= b.pos.y - (bottom_wall - b.r)
         Vertical_coll(b)
 
