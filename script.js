@@ -27,10 +27,10 @@ function startRattle() {
         newBall.elasticity = randInt(0, 10) / 10;
     }
 
-    let edge1 = new Wall(0, 0, canvas.clientWidth, 0);
-    let edge2 = new Wall(canvas.clientWidth, 0, canvas.clientWidth, canvas.clientHeight);
-    let edge3 = new Wall(canvas.clientWidth, canvas.clientHeight, 0, canvas.clientHeight);
-    let edge4 = new Wall(0, canvas.clientHeight, 0, 0);
+    let edge1 = new Wall(0, 0, canvas.width, 0);
+    let edge2 = new Wall(canvas.width, 0, canvas.width, canvas.height);
+    let edge3 = new Wall(canvas.width, canvas.height, 0, canvas.height);
+    let edge4 = new Wall(0, canvas.height, 0, 0);
     BALLZ[0].player = true;
 }
 
@@ -51,10 +51,12 @@ let coef_ability = 3.5;
 
 
 
-let right_wall = screen.width;
-let bottom_wall = screen.height;
+let right_wall = screen.width-100;
+let bottom_wall = screen.height-100;
 
-
+ctx.canvas.width  = window.right_wall;
+ctx.canvas.height = window.bottom_wall;
+console.log(bottom_wall)
 let vel_lim = 3;
 const acl = new Accelerometer({ frequency: 600 });
 
@@ -259,7 +261,7 @@ function zderzenie(b) {
         Horizontal_coll(b)
     }
 
-    if (b.pos.x > 640 - b.r) {
+    if (b.pos.x > right_wall - b.r) {
         b.vel.x = -b.vel.x * coef_restitution
         b.pos.x -= b.pos.x - (right_wall - b.r)
         Horizontal_coll(b)
@@ -271,7 +273,7 @@ function zderzenie(b) {
         Vertical_coll(b)
 
     }
-    if (b.pos.y > 480 - b.r) {
+    if (b.pos.y > bottom_wall - b.r) {
         b.vel.y = -b.vel.y * coef_restitution
         b.pos.y -= b.pos.y - (bottom_wall - b.r)
         Vertical_coll(b)
@@ -342,7 +344,8 @@ function momentum_display() {
 }
 
 function mainLoop(timestamp) {
-    ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
 
     BALLZ.forEach((b, index) => {
         let new_acc_x = -acl.x;
