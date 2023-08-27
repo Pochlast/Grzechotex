@@ -43,7 +43,7 @@ body {
 }
 
 .home-view {
-  padding: 4rem 1rem;
+  padding: 2.5rem 1rem;
 
   .quantity-input label,
   .quantity-input input {
@@ -59,7 +59,7 @@ body {
   }
 
   .quantity-input, .size-btns{
-    padding: 2rem;
+    padding: 0 2rem 4rem 2rem;
   }
 }
 
