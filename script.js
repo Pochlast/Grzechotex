@@ -59,7 +59,7 @@ let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
-let soundFile = ''
+let soundFile = './grzechotka_2.mp3'
 
 
 var devicePixelRatio = window.devicePixelRatio || 1;
