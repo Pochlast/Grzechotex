@@ -28,15 +28,15 @@ function startRattle() {
     BALLZ[0].player = true;
 }
 
-document.querySelector(".rattle-btns").onclick = function(e){
+document.querySelector(".rattle-btns").onclick = function (e) {
     document.querySelectorAll(".rattle-btns img")[0].classList.remove("target")
     document.querySelectorAll(".rattle-btns img")[1].classList.remove("target")
     document.querySelectorAll(".rattle-btns img")[2].classList.remove("target")
 
     e.target.classList.add("target");
-    if(e.target.classList.value.includes('1')) soundFile = './grzechotka_2.mp3'
-    if(e.target.classList.value.includes('2')) soundFile = './grzechotka_3.wav'
-    if(e.target.classList.value.includes('3')) soundFile = ''
+    if (e.target.classList.value.includes('1')) soundFile = './grzechotka_2.mp3'
+    if (e.target.classList.value.includes('2')) soundFile = './grzechotka_3.wav'
+    if (e.target.classList.value.includes('3')) soundFile = ''
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,8 +59,8 @@ dpi_x = document.getElementById('testdiv').offsetWidth * devicePixelRatio;
 dpi_y = document.getElementById('testdiv').offsetHeight * devicePixelRatio;
 console.log(dpi_x, dpi_y);
 
-let wall_width = window.innerWidth-40;
-let wall_height = window.innerHeight-140;
+let wall_width = window.innerWidth - 40;
+let wall_height = window.innerHeight - 140;
 
 ctx.canvas.width = wall_width
 ctx.canvas.height = wall_height
@@ -149,9 +149,7 @@ class Ball {
     }
 
     drawBall() {
-        ctx.drawImage(drawing, this.pos.x , this.pos.y , this.r*2, this.r*2);
-
-        // ctx.drawImage('./ball.png', this.pos.x , this.pos.y , this.r*2, this.r*2);
+        ctx.drawImage(drawing, this.pos.x, this.pos.y, this.r * 2, this.r * 2);
     }
 
     reposition() {
@@ -185,8 +183,8 @@ class Wall {
 }
 
 function acc_Control(b) {
-    b.acc.x = -acl.x*dpi_x*2.54;
-    b.acc.y = acl.y*dpi_x*2.54;
+    b.acc.x = -acl.x * dpi_x * 2.54;
+    b.acc.y = acl.y * dpi_x * 2.54;
 }
 
 function round(number, precision) {
@@ -243,27 +241,25 @@ function zderzenie(b) {
 
     acc_x_test = Math.round(b.vel.y * 100) / 100;
 
-    //document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
-
-    if (b.pos.x < 0 + b.r) {
+    if (b.pos.x < 0) {
         b.vel.x = -b.vel.x * coef_restitution;
         b.pos.x += b.r - b.pos.x;
         Horizontal_coll(b)
     }
 
-    if (b.pos.x > wall_width - b.r) {
+    if (b.pos.x > wall_width) {
         b.vel.x = -b.vel.x * coef_restitution
         b.pos.x -= b.pos.x - (wall_width - b.r)
         Horizontal_coll(b)
     }
 
-    if (b.pos.y < 0 + b.r) {
+    if (b.pos.y < 0) {
         b.vel.y = -b.vel.y * coef_restitution
         b.pos.y += b.r - b.pos.y
         Vertical_coll(b)
 
     }
-    if (b.pos.y > wall_height - b.r) {
+    if (b.pos.y > wall_height) {
         b.vel.y = -b.vel.y * coef_restitution
         b.pos.y -= b.pos.y - (wall_height - b.r)
         Vertical_coll(b)
@@ -330,7 +326,7 @@ function coll_res_bw(b1, w1) {
 
 function mainLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+
 
     BALLZ.forEach((b, index) => {
 
@@ -361,7 +357,7 @@ function mainLoop(timestamp) {
 
 
 
-    
+
     requestAnimationFrame(mainLoop);
 }
 
