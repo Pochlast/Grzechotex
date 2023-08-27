@@ -35,12 +35,14 @@ function startRattle() {
 }
 
 document.querySelector(".rattle-btns").onclick = function(e){
-    console.log(document.querySelectorAll(".rattle-btns img")[0].classList.contains('target'));
     document.querySelectorAll(".rattle-btns img")[0].classList.remove("target")
     document.querySelectorAll(".rattle-btns img")[1].classList.remove("target")
     document.querySelectorAll(".rattle-btns img")[2].classList.remove("target")
 
     e.target.classList.add("target");
+    if(e.target.classList.value.includes('1')) soundFile = './grzechotka_2.mp3'
+    if(e.target.classList.value.includes('2')) soundFile = './grzechotka_2_staraapka.mp3'
+    if(e.target.classList.value.includes('3')) soundFile = ''
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,6 +59,7 @@ let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
+let soundFile = ''
 
 
 var devicePixelRatio = window.devicePixelRatio || 1;
@@ -249,16 +252,16 @@ function coll_det_bb(b1, b2) {
 function Horizontal_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.x) > vel_lim) {
         b.soundAbilityHorizontal = false;
-        if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { new Audio('./grzechotka_2.mp3').play(); }
-        new Audio('./grzechotka_2.mp3').play();
+        if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { new Audio(soundFile).play(); }
+        new Audio(soundFile).play();
     }
 }
 
 function Vertical_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.y) > vel_lim) {
         b.soundAbilityHorizontal = false;
-        if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { new Audio('./grzechotka_2.mp3').play(); }
-        new Audio('./grzechotka_2.mp3').play();
+        if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { new Audio(soundFile).play(); }
+        new Audio(soundFile).play();
     }
 }
 
