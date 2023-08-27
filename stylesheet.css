@@ -70,11 +70,11 @@ body {
   border-radius: 10px;
   .rattle-btn{
     padding: 2rem;
+    opacity: 0.5;
   }
-}
-.target{
-  opacity: 1;
-  box-shadow: 0 5px #666;
+  .target{
+    opacity: 1;
+  }
 }
 
 button {

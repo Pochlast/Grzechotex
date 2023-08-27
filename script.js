@@ -151,7 +151,7 @@ class Ball {
         this.elasticity = 1;
         this.vel = new Vector(0, 0);
         this.acc = new Vector(0, 0);
-        this.acceleration = 17; //bylo 3
+        this.acceleration = 2; //bylo 3
         this.player = true;
         this.soundAbilityHorizontal = true;
         this.soundAbilityVertical = true;
