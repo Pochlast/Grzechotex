@@ -41,7 +41,7 @@ document.querySelector(".rattle-btns").onclick = function(e){
 
     e.target.classList.add("target");
     if(e.target.classList.value.includes('1')) soundFile = './grzechotka_2.mp3'
-    if(e.target.classList.value.includes('2')) soundFile = './grzechotka_2_staraapka.mp3'
+    if(e.target.classList.value.includes('2')) soundFile = './grzechotka_3.wav'
     if(e.target.classList.value.includes('3')) soundFile = ''
 }
 
