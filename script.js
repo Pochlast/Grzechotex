@@ -25,10 +25,6 @@ function startRattle() {
         newBall.elasticity = randInt(0, 10) / 10;
     }
 
-    let edge1 = new Wall(0, 0, canvas.width, 0);
-    let edge2 = new Wall(canvas.width, 0, canvas.width, canvas.height);
-    let edge3 = new Wall(canvas.width, canvas.height, 0, canvas.height);
-    let edge4 = new Wall(0, canvas.height, 0, 0);
     BALLZ[0].player = true;
 }
 
@@ -50,8 +46,6 @@ const ctx = canvas.getContext('2d');
 
 let BALLZ = [];
 let WALLZ = [];
-
-//var audio = new Audio('./grzechotka_2.mp3');
 
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
@@ -83,10 +77,8 @@ const wersja = 35;
 let acc_x = -acl.x;
 let acc_y = acl.y;
 
-
-//document.getElementsByClassName("acc_x_test")[0].innerHTML = acc_x_test
-
-//document.getElementsByClassName("wersja")[0].innerHTML = wersja
+let drawing = new Image();
+drawing.src = './ball.png'
 
 class Vector {
     constructor(x, y) {
@@ -157,20 +149,9 @@ class Ball {
     }
 
     drawBall() {
-        ctx.beginPath();
-        ctx.arc(this.pos.x, this.pos.y, this.r, 0, 2 * Math.PI);
-        ctx.strokeStyle = "black";
-        ctx.stroke();
-        ctx.fillStyle = "red";
-        ctx.fill();
-        ctx.closePath();
-    }
+        ctx.drawImage(drawing, this.pos.x , this.pos.y , this.r*2, this.r*2);
 
-    display() {
-        this.vel.drawVec(this.pos.x, this.pos.y, 10, "green");
-        ctx.fillStyle = "black";
-        ctx.fillText("v = " + this.vel.x, this.pos.x - 10, this.pos.y - 5);
-        ctx.fillText("e = " + this.elasticity, this.pos.x - 10, this.pos.y + 5);
+        // ctx.drawImage('./ball.png', this.pos.x , this.pos.y , this.r*2, this.r*2);
     }
 
     reposition() {
@@ -204,13 +185,8 @@ class Wall {
 }
 
 function acc_Control(b) {
-
-    //b.acc.x = acc_x-new_acc_x;
-
-    //b.acc.y = acc_y-new_acc_y;
     b.acc.x = -acl.x*dpi_x*2.54;
     b.acc.y = acl.y*dpi_x*2.54;
-
 }
 
 function round(number, precision) {
@@ -352,11 +328,6 @@ function coll_res_bw(b1, w1) {
     b1.vel = b1.vel.add(normal.mult(-vsep_diff));
 }
 
-function momentum_display() {
-    let momentum = Ball1.vel.add(Ball2.vel).mag();
-    ctx.fillText("Momentum: " + round(momentum, 4), 500, 330);
-}
-
 function mainLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
@@ -372,19 +343,12 @@ function mainLoop(timestamp) {
 
         canPlaySound(b);
 
-        // WALLZ.forEach((w) => {
-        //     if(coll_det_bw(BALLZ[index], w)){
-        //         pen_res_bw(BALLZ[index], w);
-        //         coll_res_bw(BALLZ[index], w);
-        //     }
-        // })
         for (let i = index + 1; i < BALLZ.length; i++) {
             if (coll_det_bb(BALLZ[index], BALLZ[i])) {
                 pen_res_bb(BALLZ[index], BALLZ[i]);
                 coll_res_bb(BALLZ[index], BALLZ[i]);
             }
         }
-        b.display();
         b.reposition();
     });
 
@@ -400,21 +364,5 @@ function mainLoop(timestamp) {
     
     requestAnimationFrame(mainLoop);
 }
-
-
-//let Wall2 = new Wall(300, 400, 550, 200);
-
-//walls along the canvas edges
-
-//intro if canvas 1138x640
-// let Wall1 = new Wall(1000, 350, 1100, 500);
-// let Wall2 = new Wall(700, 50, 800, 50);
-// let Ball1 = new Ball(-4000, 400, 80, 10);
-// let Ball2 = new Ball(960, 585, 35, 2);
-// let Ball3 = new Ball(1005, 610, 10, 2);
-// let Ball4 = new Ball(1120, 590, 10, 1);
-// let Ball45= new Ball(500, 340, 30, 2);
-// Ball1.vel.x = 290;
-
 
 requestAnimationFrame(mainLoop);
