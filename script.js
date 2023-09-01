@@ -24,8 +24,6 @@ function startRattle() {
         let newBall = new Ball(randInt(100, 500), randInt(50, 400), size ? 20 : randInt(20, 50), randInt(0, 10));
         newBall.elasticity = randInt(0, 10) / 10;
     }
-
-    BALLZ[0].player = true;
 }
 
 document.querySelector(".rattle-btns").onclick = function(e){
@@ -34,9 +32,21 @@ document.querySelector(".rattle-btns").onclick = function(e){
     document.querySelectorAll(".rattle-btns img")[2].classList.remove("target")
 
     e.target.classList.add("target");
-    if(e.target.classList.value.includes('1')) soundFile = './grzechotka_2.mp3'
-    if(e.target.classList.value.includes('2')) soundFile = './grzechotka_3.wav'
-    if(e.target.classList.value.includes('3')) soundFile = ''
+    if(e.target.classList.value.includes('1')) {
+        soundFile1 = './grzechotka_real1.wav'
+        soundFile2 = './grzechotka_real2_damp.wav'
+        soundFile3 = './grzechotka_real2_damp.wav'
+    }
+    if(e.target.classList.value.includes('2')) {
+     soundFile1 = './grzechotka_3.wav'
+     soundFile2 = './grzechotka_3.wav' 
+     soundFile3 = './grzechotka_3.wav' 
+    }
+    if(e.target.classList.value.includes('3')) {
+     soundFile1 = './grzechotka_walec1.wav'
+     soundFile2 = './grzechotka_walec2.wav' 
+     soundFile3 = './grzechotka_walec3.wav'                
+     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,15 +56,21 @@ const ctx = canvas.getContext('2d');
 
 let BALLZ = [];
 let WALLZ = [];
+
 let plot = document.querySelector('.plot')
 
-start = Date.now();
-
+let start = Date.now()
+let vel_lim_loudness = 20;
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
 let coef_restitution = 0.90;
 let coef_ability = 3.5;
-let soundFile = './grzechotka_2.mp3'
+let soundFile = './grzechotka_test.wav'
+let soundFile1 = './grzechotka_test.wav'
+let soundFile2 = './grzechotka_test.wav' 
+let soundFile3 = './grzechotka_test.wav' 
+
+
 
 
 var devicePixelRatio = window.devicePixelRatio || 1;
@@ -228,25 +244,27 @@ function coll_det_bb(b1, b2) {
 function Horizontal_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.x) > vel_lim) {
         b.soundAbilityHorizontal = false;
+        let loudness =((Math.abs(b.vel.x)<vel_lim_loudness) ? Math.abs(b.vel.x)/vel_lim_loudness : 1);
         if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { 
-            new Audio(soundFile).play(); 
             plot.innerHTML('1'+','+b.vel.x+','+(Date.now()-start)+';')
-        }else{
 
-        plot.innerHTML('2'+','+b.vel.x+','+(Date.now()-start)+';')
-        new Audio(soundFile).play();}
+            new Audio(soundFile1).play(); }else{
+            plot.innerHTML('2'+','+b.vel.x+','+(Date.now()-start)+';')
+    
+        new Audio(soundFile2).play();}
     }
 }
 
 function Vertical_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.y) > vel_lim) {
         b.soundAbilityHorizontal = false;
+        let loudness =((Math.abs(b.vel.x)<vel_lim_loudness) ? Math.abs(b.vel.x)/vel_lim_loudness : 1);
         if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { 
-            new Audio(soundFile).play();
             plot.innerHTML('3'+','+b.vel.y+','+(Date.now()-start)+';')
-         } else{
-            plot.innerHTML('4'+','+b.vel.y+','+(Date.now()-start)+';')
-        new Audio(soundFile).play();}
+
+            new Audio(soundFile2).play(); }else{
+        plot.innerHTML('4'+','+b.vel.y+','+(Date.now()-start)+';') 
+        new Audio(soundFile3).play();}
     }
 }
 
@@ -254,6 +272,7 @@ function zderzenie(b) {
 
     acc_x_test = Math.round(b.vel.y * 100) / 100;
 
+   
     if (b.pos.x < 0 + b.r) {
         b.vel.x = -b.vel.x * coef_restitution;
         b.pos.x += b.r - b.pos.x;
@@ -336,6 +355,7 @@ function coll_res_bw(b1, w1) {
 function mainLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+
     BALLZ.forEach((b, index) => {
 
         b.drawBall();
@@ -367,6 +387,5 @@ function mainLoop(timestamp) {
  
     requestAnimationFrame(mainLoop);
 }
-
 
 requestAnimationFrame(mainLoop);
