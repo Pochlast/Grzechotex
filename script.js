@@ -46,6 +46,9 @@ const ctx = canvas.getContext('2d');
 
 let BALLZ = [];
 let WALLZ = [];
+let plot = document.querySelector('.plot')
+
+start = Date.now();
 
 let LEFT, UP, RIGHT, DOWN;
 let friction = 0.001;
@@ -225,16 +228,25 @@ function coll_det_bb(b1, b2) {
 function Horizontal_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.x) > vel_lim) {
         b.soundAbilityHorizontal = false;
-        if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { new Audio(soundFile).play(); }
-        new Audio(soundFile).play();
+        if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { 
+            new Audio(soundFile).play(); 
+            plot.innerHTML('1'+','+b.vel.x+','+(Date.now()-start)+';')
+        }else{
+
+        plot.innerHTML('2'+','+b.vel.x+','+(Date.now()-start)+';')
+        new Audio(soundFile).play();}
     }
 }
 
 function Vertical_coll(b) {
     if (b.soundAbilityHorizontal && Math.abs(b.vel.y) > vel_lim) {
         b.soundAbilityHorizontal = false;
-        if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { new Audio(soundFile).play(); }
-        new Audio(soundFile).play();
+        if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { 
+            new Audio(soundFile).play();
+            plot.innerHTML('3'+','+b.vel.y+','+(Date.now()-start)+';')
+         } else{
+            plot.innerHTML('4'+','+b.vel.y+','+(Date.now()-start)+';')
+        new Audio(soundFile).play();}
     }
 }
 
@@ -324,7 +336,6 @@ function coll_res_bw(b1, w1) {
 function mainLoop(timestamp) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-
     BALLZ.forEach((b, index) => {
 
         b.drawBall();
@@ -356,5 +367,6 @@ function mainLoop(timestamp) {
  
     requestAnimationFrame(mainLoop);
 }
+
 
 requestAnimationFrame(mainLoop);
