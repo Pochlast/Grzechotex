@@ -246,10 +246,10 @@ function Horizontal_coll(b) {
         b.soundAbilityHorizontal = false;
         let loudness =((Math.abs(b.vel.x)<vel_lim_loudness) ? Math.abs(b.vel.x)/vel_lim_loudness : 1);
         if (b.pos.x > 1 / 3 * wall_width && b.pos.x < 2 / 3 * wall_width) { 
-            plot.innerHTML('1'+','+b.vel.x+','+(Date.now()-start)+';')
+            //plot.innerHTML('1'+','+b.vel.x+','+(Date.now()-start)+';')
 
             new Audio(soundFile1).play(); }else{
-            plot.innerHTML('2'+','+b.vel.x+','+(Date.now()-start)+';')
+           // plot.innerHTML('2'+','+b.vel.x+','+(Date.now()-start)+';')
     
         new Audio(soundFile2).play();}
     }
@@ -260,10 +260,10 @@ function Vertical_coll(b) {
         b.soundAbilityHorizontal = false;
         let loudness =((Math.abs(b.vel.x)<vel_lim_loudness) ? Math.abs(b.vel.x)/vel_lim_loudness : 1);
         if (b.pos.y > 1 / 3 * wall_height && b.pos.y < 2 / 3 * wall_height) { 
-            plot.innerHTML('3'+','+b.vel.y+','+(Date.now()-start)+';')
+           // plot.innerHTML('3'+','+b.vel.y+','+(Date.now()-start)+';')
 
             new Audio(soundFile2).play(); }else{
-        plot.innerHTML('4'+','+b.vel.y+','+(Date.now()-start)+';') 
+        //plot.innerHTML('4'+','+b.vel.y+','+(Date.now()-start)+';') 
         new Audio(soundFile3).play();}
     }
 }
